@@ -9,7 +9,7 @@ protected function _authorize($isOnline, $amount)
         if (!$isSameCurrency || !$this->_isCaptureFinal($amount)) {
             $this->setIsFraudDetected(true);
         }
-
+        
         // update totals
         $amount = $this->_formatAmount($amount, true);
         $this->setBaseAmountAuthorized($amount);
@@ -60,7 +60,7 @@ protected function _authorize($isOnline, $amount)
         return $this;
     }
 
-        public function registerCaptureNotification($amount, $skipFraudDetection = false)
+    public function registerCaptureNotification($amount, $skipFraudDetection = false)
     {
         $this->_generateTransactionId(Mage_Sales_Model_Order_Payment_Transaction::TYPE_CAPTURE,
             $this->getAuthorizationTransaction()
@@ -125,7 +125,7 @@ protected function _authorize($isOnline, $amount)
     }
 
 
-        public function place()
+    public function place()
     {
         Mage::dispatchEvent('sales_order_payment_place_start', array('payment' => $this));
         $order = $this->getOrder();
@@ -193,7 +193,15 @@ protected function _authorize($isOnline, $amount)
                 $orderStatus = $order->getConfig()->getStateDefaultStatus($orderState);
             } else {
                 // check if $orderStatus has assigned a state
-                $states = $order->getConfig()->getStatusStates($orderStatus);
+                if(method_exists($order->getConfig(), 'getStatusStates'))
+                {
+                    $states = $order->getConfig()->getStatusStates($orderStatus);
+                }
+                else
+                {
+                    $states = $this->getStatusStates($orderStatus);
+                }
+
                 if (count($states) == 0) {
                     $orderStatus = $order->getConfig()->getStateDefaultStatus($orderState);
                 }
@@ -218,6 +226,49 @@ protected function _authorize($isOnline, $amount)
         Mage::dispatchEvent('sales_order_payment_place_end', array('payment' => $this));
 
         return $this;
+    } 
+    
+    /**
+     * Check whether payment currency corresponds to order currency
+     *
+     * @return bool
+     */
+    public function _isSameCurrency() 
+    {
+        return !$this->getCurrencyCode() || $this->getCurrencyCode() == $this->getOrder()->getBaseCurrencyCode();
     }
+    
+    /**
+     * Retrieve state available for status
+     * Get all assigned states for specified status
+     *
+     * @param string $status
+     * @return array
+     */
+    
+    private function getStatusStates($status)
+    {
+        $states = array();
+        $collectionObj = Mage::getResourceModel('sales/order_status_collection');
+        $collection = $this->addStatusFilter($collectionObj, $status);
+        
+        foreach ($collection as $state) {
+            $states[] = $state;
+        }
+        return $states;
     }
-    ?>
+    /**
+     * add status code filter to collection
+     *
+     * @param object Mage_Sales_Model_Resource_Order_Status_Collection
+     * @param string $status
+     * @return Mage_Sales_Model_Resource_Order_Status_Collection
+     */
+    private function addStatusFilter($collectionObj, $status)
+    {
+        $collectionObj->joinStates();
+        $collectionObj->getSelect()->where('state_table.status=?', $status);
+        return $collectionObj;
+    }
+}
+?>

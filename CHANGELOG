@@ -1,3 +1,5 @@
+2.1.17
+        Added missing methods in the Magento version below 1.9: _isSameCurrency, getStatusStatuses, addStatusfilter.
 2.1.16
         Fixed creating after payment a second invoice in database instead of update invoice issue
 2.1.14

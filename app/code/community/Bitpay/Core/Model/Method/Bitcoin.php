@@ -58,9 +58,14 @@ class Bitpay_Core_Model_Method_Bitcoin extends Mage_Payment_Model_Method_Abstrac
         $invoice = $this->prepareInvoice($invoice, $payment, $amount);
 
         try {
-            $bitpayInvoice = \Mage::helper('bitpay')->getBitpayClient()->createInvoice($invoice);
+            $bitpayInvoice = \Mage::helper('bitpay')->getBitpayClient()->createInvoice($invoice);            
         } catch (\Exception $e) {
-            $this->debugData('[ERROR] In Bitpay_Core_Model_Method_Bitcoin::authorize(): ' . $e->getMessage());
+            $this->debugData('[ERROR] In Bitpay_Core_Model_Method_Bitcoin::authorize(): ' . $e->getMessage());            
+            //display min invoice value error    
+            if(strpos($e->getMessage(), 'Invoice price must be') !== FALSE)
+            {
+                \Mage::throwException($e->getMessage());
+            }
             \Mage::throwException('In Bitpay_Core_Model_Method_Bitcoin::authorize(): Could not authorize transaction.');
         }
 

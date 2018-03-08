@@ -9,8 +9,6 @@ class Bitpay_Core_Model_Observer {
 	public function implementOrderStatus($e) {
 		$order = $e -> getOrder();
 		$paymentCode = $order -> getPayment() -> getMethodInstance() -> getCode();
-		Mage::log('sales_order_place_after--------------:');
-		Mage::log('$paymentCode:' . $paymentCode);
 		if ($paymentCode == 'bitpay') {
 			$order -> setState(Mage_Sales_Model_Order::STATE_NEW, true);
 			$order -> save();

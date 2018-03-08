@@ -21,7 +21,20 @@ class Bitpay_Core_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function debugData($debugData)
     {
+        //log information about the environment
+        $phpVersion = explode('-', phpversion())[0];
+        $extendedDebugData = array(
+            '[PHP version] ' . $phpVersion,
+            '[Magento version] ' . \Mage::getVersion(),
+            '[BitPay plugin version] ' . $this->getExtensionVersion(), 
+        );
+        foreach($extendedDebugData as &$param)
+        {
+            $param = PHP_EOL . "\t\t" . $param;
+        }
+
         if (true === isset($debugData) && false === empty($debugData)) {
+            \Mage::getModel('bitpay/method_bitcoin')->debugData($extendedDebugData);
             \Mage::getModel('bitpay/method_bitcoin')->debugData($debugData);
         }
     }
@@ -166,6 +179,8 @@ class Bitpay_Core_Helper_Data extends Mage_Core_Helper_Abstract
                                                             'label'       => (string) $label,
                                                        )
                                            );
+        $network = \Mage::getStoreConfig('payment/bitpay/network');
+        $this->debugData('[INFO] In Bitpay_Core_Helper_Data::sendPairingRequest(): using the network "' . $network . '".');
 
         if (false === isset($token) || true === empty($token)) {
             $this->debugData('[ERROR] In Bitpay_Core_Helper_Data::sendPairingRequest(): could not obtain the token from the pairing process. Cannot continue!');
@@ -374,5 +389,10 @@ class Bitpay_Core_Helper_Data extends Mage_Core_Helper_Abstract
     public function getLogFile()
     {
         return "payment_bitpay.log";
+    }
+    
+    public function getExtensionVersion()
+    {
+        return (string) \Mage::getConfig()->getNode()->modules->Bitpay_Core->version;        
     }
 }

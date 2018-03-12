@@ -18,12 +18,6 @@ class Bitpay_Core_Model_Observer {
 	}
 
 	/*
-	 * TODO: Why is this here?
-	 */
-	public function checkForRequest($observer) {
-	}
-
-	/*
 	 * Queries BitPay to update the order states in magento to make sure that
 	 * open orders are closed/canceled if the BitPay invoice expires or becomes
 	 * invalid.

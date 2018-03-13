@@ -54,6 +54,9 @@ class Bitpay_Core_Model_Method_Bitcoin extends Mage_Payment_Model_Method_Abstrac
             $this->debugData('[ERROR] In Bitpay_Core_Model_Method_Bitcoin::authorize(): could not initialize invoice.');
             throw new \Exception('In Bitpay_Core_Model_Method_Bitcoin::authorize(): could not initialize invoice.');
         }
+        
+        //add order id to the redirect url to match order in the checkout/onepage/success if bitpay invoice expired
+        $invoice->setRedirectUrl(\Mage::getUrl(\Mage::getStoreConfig('payment/bitpay/redirect_url') . '/order_id/'.$payment->getOrder()->getId()));    
 
         $invoice = $this->prepareInvoice($invoice, $payment, $amount);
 

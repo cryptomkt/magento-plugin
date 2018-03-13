@@ -74,5 +74,49 @@ class Bitpay_Core_Model_Observer {
 		\Mage::helper('bitpay') -> debugData('[INFO] Bitpay_Core_Model_Observer::cleanExpired() called.');
 		\Mage::helper('bitpay') -> cleanExpired();
 	}
+        
+        /**
+        * Event Hook: checkout_onepage_controller_success_action
+        * @param $observer Varien_Event_Observer
+        */
+        public function redirectToCartIfExpired(Varien_Event_Observer $observer)
+        {
+            if ($observer->getEvent()->getName() == 'checkout_onepage_controller_success_action')
+            {
+                $lastOrderId = null;
+                foreach(\Mage::app()->getRequest()->getParams() as $key=>$value)
+                {
+                    if($key == 'order_id')
+                        $lastOrderId = $value;
+                }
 
+               if($lastOrderId != null)
+               {                
+                    //get order
+                    $order = \Mage::getModel('sales/order')->load($lastOrderId);
+                    if (false === isset($order) || true === empty($order)) {
+                        \Mage::helper('bitpay')->debugData('[ERROR] In Bitpay_Core_Model_Observer::redirectToCartIfExpired(), Invalid Order ID received.');
+                        return;
+                    }
+                    //check if order is pending
+                    if($order->getStatus() != 'pending')
+                        return;
+
+                    //check if invoice for order exist in bitpay_invoices table
+                    $bitpayInvoice = \Mage::getModel('bitpay/invoice')->load($order->getIncrementId(), 'increment_id');
+                    $bitpayInvoiceData = $bitpayInvoice->getData();
+                    //if is empty or not is array abort
+                    if(!is_array($bitpayInvoiceData) || is_array($bitpayInvoiceData) && empty($bitpayInvoiceData))
+                        return;
+
+                    //check if bitpay invoice id expired
+                    $invoiceExpirationTime = $bitpayInvoiceData['expiration_time'];
+                    if($invoiceExpirationTime < strtotime('now'))
+                    {
+                        $failure_url = \Mage::getUrl(\Mage::getStoreConfig('payment/bitpay/failure_url'));
+                        \Mage::app()->getResponse()->setRedirect($failure_url)->sendResponse();
+                    }
+                }           
+            }        
+        }
 }

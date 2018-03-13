@@ -98,6 +98,14 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </redirect_url>
+                        <failure_url translate="label">
+                            <label>Failure URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </failure_url>
                         <fullscreen translate="label">
                           <label>Redirect Checkout</label>
                           <frontend_type>select</frontend_type>

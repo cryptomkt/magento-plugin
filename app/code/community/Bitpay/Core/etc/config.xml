@@ -138,7 +138,7 @@
 				<debug>0</debug>
 				<notification_url>bitpay/ipn</notification_url>
 				<redirect_url>checkout/onepage/success</redirect_url>
-                                <failure_url>checkout/cart1</failure_url>
+                                <failure_url>checkout/cart</failure_url>
 				<speed>medium</speed>
 				<fullscreen>0</fullscreen>
 				<invoice_new>new</invoice_new>

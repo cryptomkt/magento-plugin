@@ -271,4 +271,3 @@ protected function _authorize($isOnline, $amount)
         return $collectionObj;
     }
 }
-?>

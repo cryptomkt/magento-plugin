@@ -56,8 +56,6 @@ if ($$('div.bitpay_invoice_div').length > 0) {
                 if (data.paid) {
                   ipnPoller.stop();
                   response.redirect = null;
-                  transport.responseText = JSON.stringify(response);
-                  review.nextStep(transport);
                 }
               }
             });

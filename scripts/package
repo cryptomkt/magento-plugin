@@ -11,7 +11,7 @@ date_default_timezone_set('America/New_York'); // Main Office is in Eastern Time
 /**
  * Various Configuration Settings
  */
-$version    = '2.1.13';
+$version    = '2.1.18';
 $vendorDir  = __DIR__ . '/../vendor';
 $distDir    = __DIR__ . '/../build/dist';
 $tmpDistDir = $distDir . '/tmp'; // Files will be placed here temporarly so we can zip/tar them.
@@ -143,7 +143,11 @@ $filesystem->remove($distFile.'.tgz');
 $process = new \Symfony\Component\Process\Process(
     sprintf('cd %s; tar -czf %s *', $tmpDistDir, $distFile.'.tgz')
 );
+$process->run();
 
+$process = new \Symfony\Component\Process\Process(
+    sprintf('cd %s; zip -r %s *', $tmpDistDir, $distFile.'.zip')
+);
 $process->run();
 
 // Cleanup

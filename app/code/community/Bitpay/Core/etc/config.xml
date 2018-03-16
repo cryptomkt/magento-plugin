@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <!--
 /**
-* @license Copyright 2011-2014 BitPay Inc., MIT License
+* @license Copyright 2011-2018 BitPay Inc., MIT License
 * @see https://github.com/bitpay/magento-plugin/blob/master/LICENSE
 */
 -->
 <config>
 	<modules>
 		<Bitpay_Core>
-			<version>2.1.9</version>
+			<version>2.1.18</version>
 		</Bitpay_Core>
 	</modules>
 	<frontend>

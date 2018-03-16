@@ -67,9 +67,9 @@ $xml->addChild('license', 'MIT')
     ->addAttribute('uri', 'https://github.com/bitpay/magento-plugin/blob/master/LICENSE');
 $xml->addChild('channel', 'community');
 $xml->addChild('extends');
-$xml->addChild('summary');
-$xml->addChild('description');
-$xml->addChild('notes');
+$xml->addChild('summary', 'Accept Bitcoin and Bitcoin Cash on your Magento-based e-commerce site via BitPay.');
+$xml->addChild('description', 'Use BitPays plugin to accept Bitcoin and Bitcoin Cash payments from customers anywhere on earth.  You do not need to worry about bitcoin as a currency, because the plugin uses your local currency to create a BitPay invoice. BitPay will instantly update the Magento order status once the bitcoin payment has been received.');
+$xml->addChild('notes', 'Full support for Magento 1.9');
 
 $authorsNode = $xml->addChild('authors');
 

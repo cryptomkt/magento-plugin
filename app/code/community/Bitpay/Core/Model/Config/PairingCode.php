@@ -33,7 +33,7 @@ class Bitpay_Core_Model_Config_PairingCode extends Mage_Core_Model_Config_Data
             \Mage::helper('bitpay')->sendPairingRequest($pairingCode);
         } catch (\Exception $e) {
             \Mage::helper('bitpay')->debugData(sprintf('[ERROR] Exception thrown while calling the sendPairingRequest() function. The specific error message is: "%s"', $e->getMessage()));
-            \Mage::getSingleton('core/session')->addError('There was an error while trying to pair with BitPay using the pairing code '.$pairingCode.'. Please try again or enable debug mode and send the "payment_bitpay.log" file to support@bitpay.com for more help.');
+            \Mage::getSingleton('core/session')->addError('There was an error while trying to pair with BitPay using the pairing code '.$pairingCode.'. Please make sure you select the correct Network (Livenet vs Testnet) and try again with a new 7 character pairing code or enable debug mode and send the "payment_bitpay.log" file to support@bitpay.com for more help.');
 
             return;
         }

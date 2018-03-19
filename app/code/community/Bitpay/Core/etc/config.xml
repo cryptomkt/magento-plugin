@@ -132,17 +132,17 @@
 				<order_status>new</order_status>
 				<payment_action>authorize</payment_action>
 				<active>0</active>
-				<title>Bitcoin</title>
-                                <api_key>test</api_key>
-				<network>testnet</network>
+				<title>Bitcoin and Bitcoin Cash</title>
+                <api_key>test</api_key>
+				<network>livenet</network>
 				<debug>0</debug>
 				<notification_url>bitpay/ipn</notification_url>
 				<redirect_url>checkout/onepage/success</redirect_url>
-                                <failure_url>checkout/cart</failure_url>
+                <failure_url>checkout/cart</failure_url>
 				<speed>medium</speed>
 				<fullscreen>0</fullscreen>
 				<invoice_new>new</invoice_new>
-				<invoice_paid>processing</invoice_paid>
+				<invoice_paid>pending</invoice_paid>
 				<invoice_confirmed>processing</invoice_confirmed>
 				<invoice_complete>complete</invoice_complete>
 				<invoice_expired>canceled</invoice_expired>

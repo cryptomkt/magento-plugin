@@ -12,24 +12,11 @@ You must have a BitPay merchant account to use this plugin.  It's free to [sign-
 * [OpenSSL](http://us2.php.net/openssl) Must be compiled with PHP and is used for certain cryptographic operations.
 * [PHP](http://us2.php.net/downloads.php) 5.4 or higher. This plugin will not work on PHP 5.3 and below.
 
-
-## When Upgrading From Plugin Version 1.x to 2.x:
-
-**Very Important:** You must complete remove any previous versions of the Bitpay Magento plugin before installing this new updated version. The plugin has been completely re-written to work with BitPay's new cryptographically secure RESTful API and will conflict with any previous plugin versions which use the old API.  To help you remove the old plugin files from your system, we have created a convenient shell script for Unix/Linux/Mac OS systems which will scan your webserver for these older files and delete them.  You may also remove these files by hand of course and the complete list of the files can be found in the source of the script for your convenience.  You can download this delete script here:  [scripts/delete.sh](https://github.com/bitpay/magento-plugin/blob/master/scripts/delete.sh).
-
-To use this script, simply download to your server and execute the script from a shell.  You may have to mark the script executable before first use.
-
-```sh
-chmod +x delete.sh
-./delete.sh
-```
-
-
 ## Installation
 
 **From the Magento Connect Manager:**
 
-Goto [http://www.magentocommerce.com/magento-connect/bitpay-payment-method.html](http://www.magentocommerce.com/magento-connect/bitpay-payment-method.html) and click the *Install Now* link which will give you the *Extension Key* needed for the next step.
+Goto [https://marketplace.magento.com/bitpay-bitpay-core.html](https://marketplace.magento.com/bitpay-bitpay-core.html) and click the *Install Now* link which will give you the *Extension Key* needed for the next step.
 
 Once you have the key, log into you Magento Store's Admin Panel and navigate to **System > Magento Connect > Magento Connect Manager**.
 
@@ -76,3 +63,14 @@ You are also able to configure how BitPay's IPN (Instant Payment Notifications) 
 Once enabled, your customers will be given the option to pay with Bitcoins. Once they checkout they are redirected to a full screen BitPay invoice to pay for the order.
 
 As a merchant, the orders in your Magento store can be treated as any other order. You may need to adjust the Invoice Settings depending on your order fulfillment.
+
+## When Upgrading From Plugin Version 1.x to 2.x:
+
+**Very Important:** You must complete remove any previous versions of the Bitpay Magento plugin before installing this new updated version. The plugin has been completely re-written to work with BitPay's new cryptographically secure RESTful API and will conflict with any previous plugin versions which use the old API.  To help you remove the old plugin files from your system, we have created a convenient shell script for Unix/Linux/Mac OS systems which will scan your webserver for these older files and delete them.  You may also remove these files by hand of course and the complete list of the files can be found in the source of the script for your convenience.  You can download this delete script here:  [scripts/delete.sh](https://github.com/bitpay/magento-plugin/blob/master/scripts/delete.sh).
+
+To use this script, simply download to your server and execute the script from a shell.  You may have to mark the script executable before first use.
+
+```sh
+chmod +x delete.sh
+./delete.sh
+```

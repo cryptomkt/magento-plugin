@@ -14,9 +14,11 @@ You must have a BitPay merchant account to use this plugin.  It's free to [sign-
 
 ## Installation
 
-**From the Magento Connect Manager:**
+**From the Magento Market Place**
 
-Goto [https://marketplace.magento.com/bitpay-bitpay-core.html](https://marketplace.magento.com/bitpay-bitpay-core.html) and click the *Install Now* link which will give you the *Extension Key* needed for the next step.
+* Goto [https://marketplace.magento.com/bitpay-bitpay-core.html](https://marketplace.magento.com/bitpay-bitpay-core.html) and click the *Add to Cart* link.
+* Select your shopping cart, click *Checkout* and then *Place order*
+* Click *Install* and copy the access key of the latest version of the BitPay bitcoin acceptance plugin
 
 Once you have the key, log into you Magento Store's Admin Panel and navigate to **System > Magento Connect > Magento Connect Manager**.
 
@@ -31,15 +33,7 @@ All you need to do is paste the extension key and click on the *Install* button.
 
 Visit the [Releases](https://github.com/bitpay/magento-plugin/releases) page of this repository and download the latest version. Once this is done, you can just unzip the contents and use any method you want to put them on your server. The contents will mirror the Magento directory structure.
 
-**NOTE:** These files can also up uploaded using the *Magento Connect Manager* that comes with your Magento Store
-
 **WARNING:** It is good practice to backup your database before installing extensions. Please make sure you Create Backups.
-
-
-**Using Modman:**
-
-Using [modman](https://github.com/colinmollenhour/modman) you can install the BitPay Magento Plugin. Once you have modman installed, run `modman init` if you have not already done so. Next just run `modman clone https://github.com/bitpay/magento-plugin.git` in the root of the Magento installation. In this case it is `/var/www/magento`.
-
 
 ## Configuration
 

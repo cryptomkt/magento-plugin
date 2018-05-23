@@ -57,15 +57,13 @@ class Bitpay_Core_IpnController extends Mage_Core_Controller_Front_Action
                 'url'              => isset($ipn->url) ? $ipn->url : '',
                 'pos_data'         => json_encode($ipn->posData),
                 'status'           => isset($ipn->status) ? $ipn->status : '',
-                'btc_price'        => isset($ipn->btcPrice) ? $ipn->btcPrice : '',
                 'price'            => isset($ipn->price) ? $ipn->price : '',
                 'currency'         => isset($ipn->currency) ? $ipn->currency : '',
                 'invoice_time'     => isset($ipn->invoiceTime) ? intval($ipn->invoiceTime / 1000) : '',
                 'expiration_time'  => isset($ipn->expirationTime) ? intval($ipn->expirationTime / 1000) : '',
                 'current_time'     => isset($ipn->currentTime) ? intval($ipn->currentTime / 1000) : '',
-                'btc_paid'         => isset($ipn->btcPaid) ? $ipn->btcPaid : '',
-                'rate'             => isset($ipn->rate) ? $ipn->rate : '',
                 'exception_status' => isset($ipn->exceptionStatus) ? $ipn->exceptionStatus : '',
+                'transactionCurrency' => isset($ipn->transactionCurrency) ? $ipn->transactionCurrency : ''
             )
         )->save();
 
@@ -110,34 +108,6 @@ class Bitpay_Core_IpnController extends Mage_Core_Controller_Front_Action
         if ($invoice->getPrice() != $ipn->price) {
             \Mage::getModel('bitpay/method_bitcoin')>debugData('[ERROR] In Bitpay_Core_IpnController::indexAction(), IPN price and invoice price are different. Rejecting this IPN!');
             \Mage::throwException('There was an error processing the IPN - invoice price does not match the IPN price. Rejecting this IPN!');
-        }
-
-        // Update the order to notifiy that it has been paid
-        $transactionSpeed = \Mage::getStoreConfig('payment/bitpay/speed');
-        if ($ipn->status === 'paid' 
-            || ($ipn->status === 'confirmed' && $transactionSpeed === 'high')) {
-            
-            if ($payments = $order->getPaymentsCollection())
-            {
-                $payment = count($payments->getItems())>0 ? end($payments->getItems()) : \Mage::getModel('sales/order_payment')->setOrder($order);
-            }
-            
-            if (true === isset($payment) && false === empty($payment)) {                    
-                $payment->registerCaptureNotification($invoice->getPrice());                  
-                $order->setPayment($payment);   
-                // If the customer has not already been notified by email
-                // send the notification now that there's a new order.
-                if (!$order->getEmailSent()) {
-                    \Mage::helper('bitpay')->debugData('[INFO] In Bitpay_Core_IpnController::indexAction(), Order email not sent so I am calling $order->sendNewOrderEmail() now...');
-                    $order->sendNewOrderEmail();
-                }
-
-                $order->save();
-
-            } else {
-                \Mage::helper('bitpay')->debugData('[ERROR] In Bitpay_Core_IpnController::indexAction(), Could not create a payment object in the Bitpay IPN controller.');
-                \Mage::throwException('Could not create a payment object in the Bitpay IPN controller.');
-            }
         }
 
         // use state as defined by Merchant

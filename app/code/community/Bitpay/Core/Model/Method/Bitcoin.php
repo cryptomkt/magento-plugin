@@ -237,7 +237,7 @@ class Bitpay_Core_Model_Method_Bitcoin extends Mage_Payment_Model_Method_Abstrac
         }
 
         $invoice->setFullNotifications(true);
-        $invoice->setTransactionSpeed(\Mage::getStoreConfig('payment/bitpay/speed'));
+        $invoice->setTransactionSpeed('medium');
         $invoice->setNotificationUrl(\Mage::getUrl(\Mage::getStoreConfig('payment/bitpay/notification_url')));
         $invoice->setRedirectUrl(\Mage::getUrl(\Mage::getStoreConfig('payment/bitpay/redirect_url')));
 

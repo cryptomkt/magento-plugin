@@ -176,25 +176,10 @@ class Bitpay_Core_Model_Method_Bitcoin extends Mage_Payment_Model_Method_Abstrac
         }
 
         $options              = array();
-        $options['buyerName'] = $address->getName();
-
-        if ($address->getCompany()) {
-            $options['buyerName'] = $options['buyerName'].' c/o '.$address->getCompany();
-        }
-
-        $options['buyerAddress1'] = $address->getStreet1();
-        $options['buyerAddress2'] = $address->getStreet2();
-        $options['buyerAddress3'] = $address->getStreet3();
-        $options['buyerAddress4'] = $address->getStreet4();
-        $options['buyerCity']     = $address->getCity();
-        $options['buyerState']    = $address->getRegionCode();
-        $options['buyerZip']      = $address->getPostcode();
-        $options['buyerCountry']  = $address->getCountry();
         $options['buyerEmail']    = $address->getEmail();
-        $options['buyerPhone']    = $address->getTelephone();
 
         // trim to fit API specs
-        foreach (array('buyerName', 'buyerAddress1', 'buyerAddress2', 'buyerAddress3', 'buyerAddress4', 'buyerCity', 'buyerState', 'buyerZip', 'buyerCountry', 'buyerEmail', 'buyerPhone') as $f) {
+        foreach (array('buyerEmail') as $f) {
             if (true === isset($options[$f]) && strlen($options[$f]) > 100) {
                 $this->debugData('[WARNING] In Bitpay_Core_Model_Method_Bitcoin::extractAddress(): the ' . $f . ' parameter was greater than 100 characters, trimming.');
                 $options[$f] = substr($options[$f], 0, 100);

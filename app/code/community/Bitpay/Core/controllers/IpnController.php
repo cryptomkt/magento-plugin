@@ -118,6 +118,12 @@ class Bitpay_Core_IpnController extends Mage_Core_Controller_Front_Action
             \Mage::throwException('Could not retrieve the defined state parameter to update this order in the Bitpay IPN controller.');
         }
 
+        $order_confirmation = \Mage::getStoreConfig('payment/bitpay/order_confirmation');
+        if($order_confirmation == '1')
+        {
+            $order->sendNewOrderEmail();
+        }
+        
         // Check if status should be updated
         switch ($order->getStatus()) {
             case Mage_Sales_Model_Order::STATE_CANCELED:

@@ -100,8 +100,10 @@ class Bitpay_Core_Model_Observer {
                     }
                     //check if order is pending
                     if($order->getStatus() != 'pending')
+                    {
                         return;
-
+                    }
+                    
                     //check if invoice for order exist in bitpay_invoices table
                     $bitpayInvoice = \Mage::getModel('bitpay/invoice')->load($order->getIncrementId(), 'increment_id');
                     $bitpayInvoiceData = $bitpayInvoice->getData();

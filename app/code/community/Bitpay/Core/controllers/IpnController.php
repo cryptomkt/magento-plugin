@@ -34,7 +34,12 @@ class Bitpay_Core_IpnController extends Mage_Core_Controller_Front_Action
 
         // Magento doesn't seem to have a way to get the Request body
         $ipn = json_decode($raw_post_data);
-
+        
+        if(isset($ipn->data))
+        {
+            $ipn = $ipn->data;
+        }
+        
         if (true === empty($ipn)) {
             \Mage::helper('bitpay')->debugData('[ERROR] In Bitpay_Core_IpnController::indexAction(), Could not decode the JSON payload from BitPay.');
             throw new \Exception('Could not decode the JSON payload from BitPay.');
@@ -136,7 +141,20 @@ class Bitpay_Core_IpnController extends Mage_Core_Controller_Front_Action
                 )->save();
                 break;
         }
+        
+        if($ipn->status == 'expired')
+        {
+            $order->cancel();
+            $order->setState(Mage_Sales_Model_Order::STATE_CANCELED, true, 'Cancel Transaction.');
+            $order->setStatus("canceled");
+            $order->save();
+        }
 
+        $order_confirmation = \Mage::getStoreConfig('payment/bitpay/order_confirmation');
+        if($order_confirmation == '1')
+        {
+            $order->sendNewOrderEmail();
+        }
 
     }
 }

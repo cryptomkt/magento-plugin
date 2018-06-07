@@ -18,7 +18,7 @@ To get up and running with our plugin quickly, see the GUIDE here: https://githu
 
 **BitPay Support:**
 
-* Last Cart Version Tested: 1.9.3.1
+* Last Cart Version Tested: 1.9.3.8
 * [GitHub Issues](https://github.com/bitpay/magento-plugin/issues)
   * Open an issue if you are having issues with this plugin.
 * [Support](https://help.bitpay.com)
@@ -65,7 +65,7 @@ If you encounter any issues or implement any updates or changes, please open an 
 
 The MIT License (MIT)
 
-Copyright (c) 2011-2015 BitPay, Inc.
+Copyright (c) 2011-2018 BitPay, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

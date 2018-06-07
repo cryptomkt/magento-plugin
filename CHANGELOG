@@ -1,3 +1,17 @@
+2.1.19 (2018-04-09)
+	Simplified BitPay Magento configuration screen
+	Updated PHP library to v2.2.20 (supporting BitPay's API after May 1st 2018)
+	Support for Magento Marketplace: https://marketplace.magento.com/bitpay-bitpay-core.html
+
+
+2.1.18 (2018-03-16)
+	Fixed dependencies in composer.json (#127)
+	Fixed landing page after failure or expired payment (#124, #123, #117, #120)
+	Fixed missing apikeys configuration in system.xml (#122)
+	Fixed IPN creating 2nd invoice instead of updating invoice (#121)
+	Fixed non-debug logging (#115)
+	Fixed checkout page text (#112)
+
 2.1.17
         Added missing methods in the Magento version below 1.9: _isSameCurrency, getStatusStatuses, addStatusfilter.
 2.1.16

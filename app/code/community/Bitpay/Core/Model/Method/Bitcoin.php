@@ -59,7 +59,7 @@ class Bitpay_Core_Model_Method_Bitcoin extends Mage_Payment_Model_Method_Abstrac
         $invoice->setRedirectUrl(\Mage::getUrl(\Mage::getStoreConfig('payment/bitpay/redirect_url') . '/order_id/'.$payment->getOrder()->getId()));    
 
         $invoice = $this->prepareInvoice($invoice, $payment, $amount);
-
+        
         try {
             $bitpayInvoice = \Mage::helper('bitpay')->getBitpayClient()->createInvoice($invoice);            
         } catch (\Exception $e) {
@@ -251,6 +251,7 @@ class Bitpay_Core_Model_Method_Bitcoin extends Mage_Payment_Model_Method_Abstrac
         $order = \Mage::getModel('sales/order')->load($quote->getId(), 'quote_id');
 
         $invoice->setOrderId($order->getIncrementId());
+        $invoice->setExtendedNotifications(true);
         $invoice->setPosData(json_encode(array('orderId' => $order->getIncrementId())));
 
         $invoice = $this->addCurrencyInfo($invoice, $order);

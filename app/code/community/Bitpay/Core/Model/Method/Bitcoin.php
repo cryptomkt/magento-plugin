@@ -284,11 +284,6 @@ class Bitpay_Core_Model_Method_Bitcoin extends Mage_Payment_Model_Method_Abstrac
             throw new \Exception('In Bitpay_Core_Model_Method_Bitcoin::addBuyerInfo(): could not construct new BitPay buyer object.');
         }
 
-
-        $buyer->setFirstName($order->getCustomerFirstname());
-        $buyer->setLastName($order->getCustomerLastname());
-
-
         if (Mage::getStoreConfig('payment/bitpay/fullscreen')) {
             $address = $order->getBillingAddress();
         } else {
@@ -296,49 +291,9 @@ class Bitpay_Core_Model_Method_Bitcoin extends Mage_Payment_Model_Method_Abstrac
             $address = $quote->getBillingAddress();
         }
 
-        $street = $address->getStreet1();
-        if (null !== $street && '' !== $street) {
-            $buyer->setAddress(
-                array(
-                    $street,
-                    $address->getStreet2(),
-                    $address->getStreet3(),
-                    $address->getStreet4()
-                    )
-                );
-        }
-
-        $region     = $address->getRegion();
-        $regioncode = $address->getRegionCode();
-        if (null !== $regioncode && '' !== $regioncode) {
-            $buyer->setState($regioncode);
-        } else if (null !== $region && '' !== $region) {
-            $buyer->setState($region);
-        }
-
-        $country = $address->getCountry();
-        if (null !== $country && '' !== $country) {
-            $buyer->setCountry($country);
-        }
-
-        $city = $address->getCity();
-        if (null !== $city && '' !== $city) {
-            $buyer->setCity($city);
-        }
-
-        $postcode = $address->getPostcode();
-        if (null !== $postcode && '' !== $postcode) {
-            $buyer->setZip($postcode);
-        }
-
         $email = $address->getEmail();
         if (null !== $email && '' !== $email) {
             $buyer->setEmail($email);
-        }
-
-        $telephone = $address->getTelephone();
-        if (null !== $telephone && '' !== $telephone) {
-            $buyer->setPhone($telephone);
         }
 
         $invoice->setBuyer($buyer);

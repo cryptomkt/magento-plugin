@@ -1,18 +1,18 @@
 {
-    "name": "bitpay/magento-plugin",
-    "description": "Bitcoin payment module using the bitpay.com service",
-    "keywords": ["magento","bitcoin", "bitcoin cash"],
+    "name": "cryptomkt/magento-plugin",
+    "description": "Cryptocurrencies payment module using CryptoMarket",
+    "keywords": ["magento","bitcoin", "bitcoin","ethereum","stellar","lumen","cryptocurrencies"],
     "minimum-stability": "stable",
     "type": "magento-plugin",
-    "homepage": "https://github.com/bitpay/magento-plugin",
+    "homepage": "https://github.com/cryptomkt/magento-plugin",
     "license": "MIT",
     "support": {
-        "email": "support@bitpay.com",
-        "issues": "https://github.com/bitpay/magento-plugin/issues",
-        "source": "https://github.com/bitpay/magento-plugin"
+        "email": "support@cryptomkt.com",
+        "issues": "https://github.com/cryptomkt/magento-plugin/issues",
+        "source": "https://github.com/cryptomkt/magento-plugin"
     },
     "require": {
-         "bitpay/php-client": "~2.2"
+         "cryptomkt/cryptomkt-guzzle-php": "~2.2"
     },
     "require-dev": {
         "symfony/finder": "~2.3",
@@ -31,7 +31,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.2.x-dev"
+            "dev-master": "0.1-dev"
         }
     },
     "archive": {

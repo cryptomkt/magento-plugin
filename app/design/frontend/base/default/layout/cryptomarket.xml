@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @license Copyright 2016-2018 CryptoMarket Inc., MIT License
+ * @see https://github.com/cryptomkt/magento-plugin/blob/master/LICENSE
+ */
+-->
+<layout>
+	<checkout_onepage_review>
+		<reference name="checkout.onepage.review.info.items.after">
+			<block type="core/text" name="review.test.2">
+				<action method="setText">
+					<text>Pay with Cryptocurrencies</text>
+				</action>
+			</block>
+		</reference>
+	</checkout_onepage_review>
+</layout>

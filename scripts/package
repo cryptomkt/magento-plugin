@@ -1,21 +1,21 @@
 #!/usr/bin/env php
 <?php
 /**
- * @license Copyright 2011-2014 BitPay Inc., MIT License
- * @see https://github.com/bitpay/magento-plugin/blob/master/LICENSE
+ * @license Copyright 2016-2018 CryptoMarket Inc., MIT License
+ * @see https://github.com/cryptomkt/magento-plugin/blob/master/LICENSE
  */
 error_reporting(E_ALL | E_STRICT);
 ini_set('display_errors', 1);
-date_default_timezone_set('America/New_York'); // Main Office is in Eastern Timezone
+date_default_timezone_set('America/Santiago'); // Main Office is in Eastern Timezone
 
 /**
  * Various Configuration Settings
  */
-$version    = '2.1.19';
+$version    = '0.1.0';
 $vendorDir  = __DIR__ . '/../vendor';
 $distDir    = __DIR__ . '/../build/dist';
 $tmpDistDir = $distDir . '/tmp'; // Files will be placed here temporarly so we can zip/tar them.
-$distFile   = $distDir . '/Bitpay_Core-'.$version; // Without extension
+$distFile   = $distDir . '/Cryptomarket_Core-'.$version; // Without extension
 
 require_once $vendorDir . '/autoload.php';
 
@@ -27,14 +27,14 @@ $filesystem = new \Symfony\Component\Filesystem\Filesystem();
 $finder = new \Symfony\Component\Finder\Finder();
 $finder
     ->files()
-    ->in($vendorDir . '/bitpay/php-client/src')
+    ->in($vendorDir . '/cryptomkt/cryptomkt-guzzle-php/src')
     ->exclude('Tests');
 
 foreach ($finder as $file) {
     $path = $file->getRelativePathname();
     $filesystem->mkdir(
         sprintf(
-            '%s/lib/%s',
+            '%s/lib/Cryptomarket/%s',
             $tmpDistDir,
             dirname($file->getRelativePathname())
         )
@@ -42,7 +42,7 @@ foreach ($finder as $file) {
     $filesystem->copy(
         $file->getRealPath(),
         sprintf(
-            '%s/lib/%s',
+            '%s/lib/Cryptomarket/%s',
             $tmpDistDir,
             $file->getRelativePathname()
         ),
@@ -51,8 +51,8 @@ foreach ($finder as $file) {
 }
 $filesystem->mirror('app/', sprintf('%s/app/', $tmpDistDir));
 $filesystem->mirror('lib/', sprintf('%s/lib/', $tmpDistDir));
-$filesystem->copy('LICENSE', sprintf('%s/app/code/community/Bitpay/Core/LICENSE', $tmpDistDir));
-$filesystem->copy('README.md', sprintf('%s/app/code/community/Bitpay/Core/README.md', $tmpDistDir));
+$filesystem->copy('LICENSE', sprintf('%s/app/code/community/Cryptomarket/Core/LICENSE', $tmpDistDir));
+$filesystem->copy('README.md', sprintf('%s/app/code/community/Cryptomarket/Core/README.md', $tmpDistDir));
 
 // All required files are in the temp. distribution directory
 
@@ -60,15 +60,15 @@ $filesystem->copy('README.md', sprintf('%s/app/code/community/Bitpay/Core/README
  * Need to create the package.xml file required by Magento
  */
 $xml = simplexml_load_string('<package/>');
-$xml->addChild('name', 'Bitpay_Core');
+$xml->addChild('name', 'Cryptomarket_Core');
 $xml->addChild('version', $version);
 $xml->addChild('stability', 'stable');
 $xml->addChild('license', 'MIT')
-    ->addAttribute('uri', 'https://github.com/bitpay/magento-plugin/blob/master/LICENSE');
+    ->addAttribute('uri', 'https://github.com/cryptomkt/magento-plugin/blob/master/LICENSE');
 $xml->addChild('channel', 'community');
 $xml->addChild('extends');
-$xml->addChild('summary', 'Accept Bitcoin and Bitcoin Cash on your Magento-based e-commerce site via BitPay.');
-$xml->addChild('description', 'Use BitPays plugin to accept Bitcoin and Bitcoin Cash payments from customers anywhere on earth.  You do not need to worry about bitcoin as a currency, because the plugin uses your local currency to create a BitPay invoice. BitPay will instantly update the Magento order status once the bitcoin payment has been received.');
+$xml->addChild('summary', 'Accept Cryptocurrencies on your Magento-based e-commerce site via CryptoCompra by CryptoMarket.');
+$xml->addChild('description', 'Accept multiple cryptocurrencies and turn into local currency as EUR, CLP, BRL and ARS. Welcome to CryptoCompra a new way for payments: simple, free and totally secure.');
 $xml->addChild('notes', 'Full support for Magento 1.9');
 
 $authorsNode = $xml->addChild('authors');
@@ -76,8 +76,8 @@ $authorsNode = $xml->addChild('authors');
 $authors = array(
     array(
         'Integrations Team', // Name
-        'BitPayInc', // Magento Connect Username
-        'support@bitpay.com', // Email
+        'CryptoMarketInc', // Magento Connect Username
+        'support@cryptomkt.com', // Email
     ),
 );
 

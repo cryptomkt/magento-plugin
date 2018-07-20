@@ -1,0 +1,17 @@
+<?php
+/**
+ * @license Copyright 2016-2018 CryptoMarket Inc., MIT License
+ * @see https://github.com/cryptomkt/magento-plugin/blob/master/LICENSE
+ */
+
+/**
+ * @see Cryptomarket_Core_Block_Info
+ */
+
+echo '<h3>Ordered with CryptoMarket</h3>';
+
+if ($url = $this->getCryptomarketInvoiceUrl()) {
+    echo '<p><a href="' . $url . '" target="_blank">View Invoice</a></p>';
+}
+
+?>

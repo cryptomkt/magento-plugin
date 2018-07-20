@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @license Copyright 2016-2018 CryptoMarket Inc., MIT License
+ * @see https://github.com/cryptomkt/magento-plugin/blob/master/LICENSE
+ */
+ -->
+ <config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <cryptomarket translate="title" module="cryptomarket">
+                        <title>CryptoCompra by CryptoMarket</title>
+                    </cryptomarket>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <cryptomarket translate="title" module="cryptomarket">
+                                        <title>CryptoMarket Settings</title>
+                                    </cryptomarket>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <layout>
+        <updates>
+            <cryptomarket>
+                <file>cryptomarket.xml</file>
+            </cryptomarket>
+        </updates>
+    </layout>
+    <translate>
+        <modules>
+            <cryptomarket>
+                <files>
+                    <default>Cryptomarket_Core.csv</default>
+                </files>
+            </cryptomarket>
+        </modules>
+    </translate>
+ </config>

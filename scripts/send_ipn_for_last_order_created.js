@@ -1,6 +1,6 @@
 var mysql = require('mysql');
 var format = require('string-template');
-var query = 'select * from bitpay_invoices where quote_id=(select MAX(quote_id) from bitpay_invoices)';
+var query = 'select * from cryptomarket_invoices where quote_id=(select MAX(quote_id) from cryptomarket_invoices)';
 var spawn = require('child_process').spawn;
 var config = require('./config.json');
 var data = {};
@@ -55,7 +55,7 @@ function processRows(err, rows, fields) {
     }
   }
   data.buyerFields = {};
-  data.url = 'https://test.bitpay.com:443/invoice?id=' + rows[0].id;
+  data.url = 'https://test.cryptomkt.com:443/invoice?id=' + rows[0].id;
   data.posData = '{\"orderId\":\"' + rows[0].order_id.toString() + '\"}';
   data.btcPaid = data.btcPrice;
   data.btcDue = '0.000000';

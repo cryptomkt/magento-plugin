@@ -1,7 +1,7 @@
 <?php
 /**
- * @license Copyright 2011-2014 BitPay Inc., MIT License
- * @see https://github.com/bitpay/magento-plugin/blob/master/LICENSE
+ * @license Copyright 2016-2018 CryptoMarket Inc., MIT License
+ * @see https://github.com/cryptomkt/magento-plugin/blob/master/LICENSE
  */
 
 if ($mage = realpath(__DIR__.'/../build/magento/app/Mage.php')) {

@@ -3,7 +3,7 @@
 /**
  * The MIT License (MIT)
  * 
- * Copyright (c) 2011-2014 BitPay
+ * Copyright (c) 2011-2014 CryptoMarket
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -38,17 +38,17 @@
     >
 
     <testsuites>
-        <testsuite name="bitpay/magento-plugin Test Suite">
+        <testsuite name="cryptomarket/magento-plugin Test Suite">
             <directory>../tests/</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>../app/code/community/Bitpay/Core/</directory>
+            <directory>../app/code/community/Cryptomarket/Core/</directory>
             <directory>../shell</directory>
             <exclude>
-                <directory>../app/code/community/Bitpay/Core/sql</directory>
+                <directory>../app/code/community/Cryptomarket/Core/sql</directory>
             </exclude>
         </whitelist>
     </filter>

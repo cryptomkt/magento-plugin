@@ -1,6 +1,6 @@
 # The MIT License (MIT)
 # 
-# Copyright (c) 2011-2014 BitPay, Inc.
+# Copyright (c) 2011-2014 CryptoMarket Inc., Inc.
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-app/code/community/Bitpay/Core app/code/community/Bitpay/Core
-app/design/frontend/base/default/layout/bitpay.xml app/design/frontend/base/default/layout/bitpay.xml
-app/design/frontend/base/default/template/bitpay app/design/frontend/base/default/template/bitpay
-app/etc/modules/Bitpay_Core.xml app/etc/modules/Bitpay_Core.xml
-lib/Bitpay lib/Bitpay
+app/code/community/Cryptomarket/Core app/code/community/Cryptomarket/Core
+app/design/frontend/base/default/layout/cryptomarket.xml app/design/frontend/base/default/layout/cryptomarket.xml
+app/design/frontend/base/default/template/cryptomarket app/design/frontend/base/default/template/cryptomarket
+app/etc/modules/Cryptomarket_Core.xml app/etc/modules/Cryptomarket_Core.xml
+lib/Cryptomarket lib/Cryptomarket

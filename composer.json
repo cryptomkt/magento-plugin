@@ -12,8 +12,7 @@
         "source": "https://github.com/cryptomkt/magento-plugin"
     },
     "require": {
-         "cryptomkt/cryptomkt-guzzle-php": "dev-master",
-         "bitpay/php-client": "~2.2"
+         "cryptomkt/cryptomkt-curl-php": "dev-master"
     },
     "require-dev": {
         "symfony/finder": "~2.3",

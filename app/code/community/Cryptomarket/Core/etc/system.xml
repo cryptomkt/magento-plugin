@@ -163,8 +163,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </order_confirmation>
-
-                      <mage_settings_heading>
+                        <mage_settings_heading>
                             <label>Magento Specific Settings</label>
                             <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
                             <sort_order>75</sort_order>

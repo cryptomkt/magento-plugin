@@ -10,7 +10,7 @@
 		<reference name="checkout.onepage.review.info.items.after">
 			<block type="core/text" name="review.test.2">
 				<action method="setText">
-					<text>Pay with Cryptocurrencies</text>
+					<text>Pay with CryptoCompra by CryptoMarket</text>
 				</action>
 			</block>
 		</reference>

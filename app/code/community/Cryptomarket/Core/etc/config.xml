@@ -54,7 +54,7 @@
 					</auto_invoice_order>
 				</observers>
 			</sales_order_place_before>
-			<sales_order_place_after>
+			<sales_order_save_after>
 				<observers>
 					<cryptomarket_core_model_observer>
 						<type>singleton</type>
@@ -62,38 +62,8 @@
 						<method>createPayOrder</method>
 					</cryptomarket_core_model_observer>
 				</observers>
-			</sales_order_place_after>
-			<checkout_onepage_controller_success_action>
-				<observers>
-					<cryptomarket_checkout_onepage_success_observer>
-						<type>singleton</type>
-						<class>cryptomarket_core_model_observer</class>
-						<method>redirectToCartIfExpired</method>
-					</cryptomarket_checkout_onepage_success_observer>
-				</observers>
-			</checkout_onepage_controller_success_action>
+			</sales_order_save_after>
 		</events>
-		<resources>
-			<cryptomarket_write>
-				<connection>
-					<use>core_write</use>
-				</connection>
-			</cryptomarket_write>
-			<cryptomarket_read>
-				<connection>
-					<use>core_read</use>
-				</connection>
-			</cryptomarket_read>
-			<cryptomarket_setup>
-				<setup>
-					<module>Cryptomarket_Core</module>
-					<class>Cryptomarket_Core_Model_Resource_Mysql4_Setup</class>
-				</setup>
-				<connection>
-					<use>core_setup</use>
-				</connection>
-			</cryptomarket_setup>
-		</resources>
 	</global>
 	<frontend>
 		<routers>
@@ -128,7 +98,7 @@
 				<active>0</active>
 				<model>cryptomarket/method_redirect</model>
 				<order_status>new</order_status>
-				<title>Bitcoin|Ethereum|Stellar</title>
+				<title>Pay with CryptoCompra by CryptoMarket</title>
 				<payment_receiver>user@domain.com</payment_receiver>
 				<redirect_url>checkout/onepage/success</redirect_url>
 				<failure_url>checkout/cart</failure_url>

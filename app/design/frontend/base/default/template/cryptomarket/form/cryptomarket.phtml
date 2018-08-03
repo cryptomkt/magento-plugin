@@ -9,9 +9,8 @@
  */
 
 $_code = $this->getMethodCode();
-// if (Mage::getStoreConfig('payment/cryptomarket/fullscreen')) {
-	echo '<ul class="form-list" id="payment_form_' . $_code . '">' .
-	         '<li>You will be transfered to <a href="https://cryptomkt.com" target="_blank">CryptoMarket</a> to complete your purchase.</li>' .
-	     '</ul>';
-// }
+echo '<ul class="form-list" id="payment_form_' . $_code . '">' .
+         '<img src="'.$this->getSkinUrl('images/color-btn300-cryptocompra.png').'"/><br>' .
+         '<li>You will be transfered to <a href="https://cryptomkt.com" target="_blank">CryptoMarket</a> to complete your purchase.</li>' .
+     '</ul>';
 ?>

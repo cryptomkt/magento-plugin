@@ -109,12 +109,6 @@ class Cryptomarket_Core_UpdaterController extends Mage_Core_Controller_Front_Act
 
                 break;
         }
-
-        $order_confirmation = \Mage::getStoreConfig('payment/cryptomarket/order_confirmation');
-        if($order_confirmation == '1')
-        {
-            $order->sendNewOrderEmail();
-        }
     }
 
     /**
@@ -124,10 +118,10 @@ class Cryptomarket_Core_UpdaterController extends Mage_Core_Controller_Front_Act
      */
     private function setCanceledOrder($order, $log_message){
         error_log($log_message);
+        $order->addStatusToHistory(Mage_Sales_Model_Order::STATE_CANCELED);
         $order->cancel();
-        $order->setState(Mage_Sales_Model_Order::STATE_CANCELED, true, 'Cancel Transaction.');
-        $order->setStatus("canceled");
         $order->save();
+        $order->sendOrderUpdateEmail();
     }
 
     /**
@@ -137,9 +131,9 @@ class Cryptomarket_Core_UpdaterController extends Mage_Core_Controller_Front_Act
      */
     private function setProcessingOrder($order, $log_message){
         error_log($log_message);
-        $order->setState(Mage_Sales_Model_Order::STATE_PROCESSING, true, 'Processing Transaction.');
-        $order->setStatus("processing");
+        $order->addStatusToHistory(Mage_Sales_Model_Order::STATE_HOLDED);
         $order->save();
+        $order->sendNewOrderEmail();
     }
 
     /**
@@ -149,8 +143,8 @@ class Cryptomarket_Core_UpdaterController extends Mage_Core_Controller_Front_Act
      */
     private function setCompletedOrder($order, $log_message){
         error_log($log_message);
-        $order->setState(Mage_Sales_Model_Order::STATE_COMPLETE, true, 'Complete Transaction.');
-        $order->setStatus("complete");
+        $order->addStatusToHistory(Mage_Sales_Model_Order::STATE_COMPLETE);
         $order->save();
+        $order->sendOrderUpdateEmail();
     }
 }

@@ -95,7 +95,7 @@
 	<default>
 		<payment>
 			<cryptomarket>
-				<active>0</active>
+				<active>1</active>
 				<model>cryptomarket/method_redirect</model>
 				<order_status>new</order_status>
 				<title>Pay with CryptoCompra by CryptoMarket</title>
@@ -103,12 +103,7 @@
 				<redirect_url>checkout/onepage/success</redirect_url>
 				<failure_url>checkout/cart</failure_url>
 				<debug>0</debug>
-				<invoice_new>new</invoice_new>
-				<invoice_paid>pending</invoice_paid>
-				<invoice_confirmed>processing</invoice_confirmed>
-				<invoice_complete>complete</invoice_complete>
-				<invoice_expired>canceled</invoice_expired>
-				<invoice_invalid>canceled</invoice_invalid>
+				<sort_order>1</sort_order>
 			</cryptomarket>
 		</payment>
 	</default>

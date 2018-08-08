@@ -58,8 +58,8 @@ class Cryptomarket_Core_Model_Method_Redirect extends Mage_Payment_Model_Method_
     * @return string
     */
     public function getOrderPlaceRedirectUrl()
-    {error_log('[INFO] getOrderPlaceRedirectUrl()');
-        $this->debugData('[INFO] In Bitpay_Core_Model_Method_Bitcoin::getOrderPlaceRedirectUrl(): $_redirectUrl is ' . self::$_redirectUrl);
+    {
+        $this->debugData('[INFO] In cryptomkt_Core_Model_Method_Bitcoin::getOrderPlaceRedirectUrl(): $_redirectUrl is ' . self::$_redirectUrl);
         return self::$_redirectUrl;
     }
 

@@ -60,7 +60,7 @@ class Cryptomarket_Core_Helper_Data extends Mage_Core_Helper_Abstract
      * @return string
      */
     public function getRedirectUrl()
-    { error_log('[INFO] getRedirectUrl()');
+    {
         return \Mage::getUrl(\Mage::getStoreConfig('payment/cryptomarket/redirect_url'));
     }
 
@@ -70,7 +70,7 @@ class Cryptomarket_Core_Helper_Data extends Mage_Core_Helper_Abstract
      * @return string
      */
     public function getFailureUrl()
-    {error_log('[INFO] getFailureUrl()');
+    {
         return \Mage::getUrl(\Mage::getStoreConfig('payment/cryptomarket/failure_url'));
     }
 

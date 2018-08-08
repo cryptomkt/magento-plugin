@@ -10,7 +10,7 @@ class Cryptomarket_Core_Model_Observer {
 	public function implementOrderStatus($e) {
 		$order = $e -> getOrder();
 		$paymentCode = $order -> getPayment() -> getMethodInstance() -> getCode();
-		if ($paymentCode == 'bitpay') {
+		if ($paymentCode == 'cryptomarket') {
 			$order -> setState(Mage_Sales_Model_Order::STATE_NEW, true);
 			$order -> save();
 		}
@@ -57,17 +57,25 @@ class Cryptomarket_Core_Model_Observer {
 
 		$result = $client->createPayOrder($payload);
 
-		if( $result->status === "success" ){ error_log('[INFO] success pay order');
+		if( $result->status === "success" ){
 			Mage::getModel('cryptomarket/method_redirect')->setRedirectToCryptoMarket($result->data->payment_url);
+
+			$order_confirmation = \Mage::getStoreConfig('payment/cryptomarket/order_confirmation');
+			if($order_confirmation == '1')
+			{
+				$order->sendNewOrderEmail();
+			}
+
 			return;
 		}
-		else{ error_log('[INFO] error pay order');
+		else{
 			Mage::getModel('cryptomarket/method_redirect')->setRedirectToCryptoMarket(\Mage::helper('cryptomarket')->getFailureUrl());
 
 			$order->cancel();
 			$order->setState(Mage_Sales_Model_Order::STATE_CANCELED, true, 'Cancel Transaction. By '.$result->message);
 			$order->setStatus("canceled");
 			$order->save();
+			$order->sendOrderUpdateEmail();
 			Mage::getSingleton('core/session')->addError('Order was canceled by '.$result->message.'. Please try again or contact with the website administrator.');
 			Mage::helper('cryptomarket')->debugData('[ERROR] In Cryptomarket_Core_Model_Observer::createPayOrder(), Error creating pay order: '.json_encode($result));
 		}

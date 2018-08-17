@@ -67,7 +67,8 @@ class Cryptomarket_Core_Model_Method_Redirect extends Mage_Payment_Model_Method_
     * setRedirectToCryptoMarket Define the redirect url
     * @param String $url
     */
-    public function setRedirectToCryptoMarket($url){
+    public function setRedirectToCryptoMarket($url)
+    {
         self::$_redirectUrl = $url;
     }
 }

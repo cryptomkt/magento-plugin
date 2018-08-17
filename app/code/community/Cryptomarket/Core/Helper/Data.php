@@ -108,11 +108,12 @@ class Cryptomarket_Core_Helper_Data extends Mage_Core_Helper_Abstract
         if (true === empty($this->_autoloaderRegistered)) {
             $this->registerAutoloader();
         }
+
         $payment_receiver = \Mage::getStoreConfig('payment/cryptomarket/payment_receiver');
         $apikey = \Mage::getStoreConfig('payment/cryptomarket/cryptomkt_apikey');
         $apisecret = \Mage::getStoreConfig('payment/cryptomarket/cryptomkt_apisecret');
 
-        if ( true === empty($payment_receiver) || true === empty($apikey) || true === empty($apisecret) ) {
+        if (true === empty($payment_receiver) || true === empty($apikey) || true === empty($apisecret)) {
             $this->debugData('[ERROR] In Cryptomarket_Core_Helper_Data::getCryptomarketClient(): Credentials not defined. Cannot continue!');
             throw new \Exception('In Cryptomarket_Core_Helper_Data::getCryptomarketClient(): Credentials not defined. Cannot continue!');
         } else {

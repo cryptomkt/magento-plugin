@@ -22,7 +22,7 @@ class Cryptomarket_Core_UpdaterController extends Mage_Core_Controller_Front_Act
         }
 
         //The Raw Post Data
-        $payload = (object) $_POST;
+        $payload = (object) filter_input_array(INPUT_POST);
 
         if (true === empty($payload)) {
             \Mage::helper('cryptomarket')->debugData('[ERROR] In Cryptomarket_Core_IpnController::indexAction(), Could not decode the JSON payload from CryptoMarket.');
@@ -116,7 +116,8 @@ class Cryptomarket_Core_UpdaterController extends Mage_Core_Controller_Front_Act
      * @param Object $order
      * @param String $log_message
      */
-    private function setCanceledOrder($order, $log_message){
+    private function setCanceledOrder($order, $log_message)
+    {
         error_log($log_message);
         $order->addStatusToHistory(Mage_Sales_Model_Order::STATE_CANCELED);
         $order->cancel();
@@ -129,7 +130,8 @@ class Cryptomarket_Core_UpdaterController extends Mage_Core_Controller_Front_Act
      * @param Object $order
      * @param String $log_message
      */
-    private function setProcessingOrder($order, $log_message){
+    private function setProcessingOrder($order, $log_message)
+    {
         error_log($log_message);
         $order->addStatusToHistory(Mage_Sales_Model_Order::STATE_HOLDED);
         $order->save();
@@ -141,7 +143,8 @@ class Cryptomarket_Core_UpdaterController extends Mage_Core_Controller_Front_Act
      * @param Object $order
      * @param String $log_message
      */
-    private function setCompletedOrder($order, $log_message){
+    private function setCompletedOrder($order, $log_message)
+    {
         error_log($log_message);
         $order->addStatusToHistory(Mage_Sales_Model_Order::STATE_COMPLETE);
         $order->save();
